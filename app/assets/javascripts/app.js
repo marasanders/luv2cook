@@ -4,8 +4,7 @@
   angular
   .module("luv2cook", [
     "ui.router",
-    "ngResource",
-    "categories"
+    "ngResource"
   ])
   .config(["$stateProvider", "$locationProvider", RouterFunction])
   .factory("CategoryFactory", [
