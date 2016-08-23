@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  servings: 9.99
+  calories: 9.99
+  rating: 9.99
+  category: 
+
+two:
+  title: MyString
+  servings: 9.99
+  calories: 9.99
+  rating: 9.99
+  category: 

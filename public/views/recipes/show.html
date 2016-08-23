@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <main>
+        <img ng-src={{vm.photo_url}} height="42" width="42">
+    <!-- <div>{{vm.recipe.photo_url}}</div> -->
+    <!-- <div><img ng-src="{{vm.recipe.photo_url}}" style="width:304px;height:228px;"/></div> -->
+    <header class = "jumbotron" id = "catheader" ng-style="{'background-image': 'url(' + vm.recipe.photo_url+ ')'}">
+      <h1><strong>{{vm.recipe.title}}</strong></h1>
+    </header>
+<span class="col-md-4">Servings :{{vm.recipe.servings}}</span>
+<span class="col-md-4">Calories :{{vm.recipe.calories}}</span>
+<span class="col-md-4">Ratings :{{vm.recipe.ratings}}</span>
+
+<h1></h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <div></div>
+      <th>{{vm.recipes}}</th>
+      <th colspan="3"></th>
+      <tr data-ng-repeat="ingredient in vm.ingredients">
+        <td tabindex="1">{{ingredient.amount}} {{ingredient.measurement}} {{ingredient.component}}</td>
+     </tr>
+      </thead>
+    </table>
+    <div>
+      {{vm.recipe.instructions}}
+    </div>
+  </main>
+</div>

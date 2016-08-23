@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <main>
+    <div>{{vm}}RAILS</div>
+<h1><strong>{{vm.recipe.title}}</strong></h1>
+<span class="pull-left">Servings :{{vm.recipe.servings}}</span>
+<span class="pull-right">Calories :{{vm.recipe.calories}}</span>
+<span class="pull-left">Servings :{{vm.recipe.ratings}}</span>
+
+<h1></h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <div></div>
+      <th>{{vm.recipes}}</th>
+      <th colspan="3"></th>
+      <tr data-ng-repeat="ingredients in vm.ingredients">
+        <td tabindex="1">{{vm.ingredient.amount}}{{vm.ingredient.measurement}} .{{vm.ingredient.component}}</td>
+     </tr>
+      </thead>
+    </table>
+    <div>
+    </div>
+  </main>
+</div>

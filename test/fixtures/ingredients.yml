@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  component: MyString
+  amount: MyString
+  measurement: MyString
+  amount2: MyString
+  measurement2: MyString
+  amount3: MyString
+  measurement3: MyString
+  amount4: MyString
+  measurement4: MyString
+  recipe: 
+
+two:
+  component: MyString
+  amount: MyString
+  measurement: MyString
+  amount2: MyString
+  measurement2: MyString
+  amount3: MyString
+  measurement3: MyString
+  amount4: MyString
+  measurement4: MyString
+  recipe: 

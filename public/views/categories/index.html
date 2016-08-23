@@ -1,0 +1,42 @@
+
+
+<div class="container">
+  <header class="jumbotron" id="categories">
+    <h1>Categories</h1>
+  </header>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <!-- <th>{{vm.category_data}}</th> -->
+        <th colspan="3"></th>
+        <tr data-ng-repeat="category in vm.category_data">
+          <td>{{$index + 1}}.
+            <span ng-hide="category.showEdit">
+              <a data-ui-sref="categoryShow({id: category.id})" tabindex="1" class="large_blue">{{category.Cat_name}}</a>
+              <span class="btn-group pull-right row">
+                <span class="col-md-3">
+                  <button ng-click="category.showEdit = !category.showEdit" class="btn editbtn">  Edit </button>
+                </span>
+                <span class="col-md-1"></span>
+                <span class="col-md-3">
+                  <button class="btn deletebtn" data-ng-click="vm.destroy($index)">Delete</button>
+                </span>
+              </span>
+            </span>
+            <span ng-show="category.showEdit">
+              <input type="text" ng-model="category.Cat_name">
+              <button ng-click="vm.update(category)">Update</button>
+            </span>
+          </td>
+         </tr>
+          <tr>
+            <td>
+              <input type="text" data-ng-model="vm.new_category.Cat_name" placeholder="Enter New Category" /><sp> </sp><button class="createbtn" data-ng-click="vm.create()">Create</button>
+            </td>
+          </tr>
+
+      </thead>
+    </table>
+   <button ng-click="vm.search()">Search</button>
+  </main>
+</div>
