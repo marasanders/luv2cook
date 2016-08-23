@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'devise_token_auth'
+gem "rails_12factor", group: :production
 
 
 # Use Capistrano for deployment
