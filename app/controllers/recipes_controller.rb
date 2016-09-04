@@ -18,7 +18,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    puts "in create"
     @category = Category.find(params[:category_id])
     @recipe = @category.recipes.create!(recipe_params)
     render json: @recipe, status: :ok

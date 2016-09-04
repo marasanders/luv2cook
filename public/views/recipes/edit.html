@@ -1,30 +1,102 @@
 <div class="container-fluid">
   <main>
     <!-- <div>{{vm}}</div> -->
-<header class = "jumbotron" id = "catheader" ng-style="{'background-image': 'url(' + vm.category.image_url+ ')'}">
-  <h1><strong>{{vm.category.Cat_name}}</strong></h1>
-</header>
+    <header class = "jumbotron" id = "catheader" ng-style="{'background-image': 'url(' + vm.recipe.photo_url+ '), url('+ vm.category.image_url+ ')'}">
+      <h1><strong>{{vm.recipe.title}}</strong></h1>
+    </header>
 
-<h1>Recipes</h1>
+    <h1>Recipes</h1>
 
-<table class="table table-striped">
-  <thead>
-      <div></div>
-      <th colspan="3"></th>
-      <tr>
-        <td>
-           <span>
-             <input type="text" ng-model="vm.recipe.title">
-             <input type="text" ng-model="vm.recipe.servings">
-             <input type="text" ng-model="vm.recipe.calories">
-             <input type="text" ng-model="vm.recipe.ratings">
-             <input type="text" ng-model="vm.recipe.photo_url">
-             <input class="form-control input-lg" id="inputlg" type="text" ng-model="vm.recipe.instructions">
-             <button class="editbtn" data-ng-click="vm.update(recipe)">Update</button>
-          </span>
-        </td>
-      </tr>
-   </thead>
-  </table>
-</main>
+    <span>
+      <div class = "table-responsive">
+      <table class="table table-striped" id = "topcontent">
+        <thead class="toplabel">
+          <th colspan="3"></th>
+          <tr>
+            <th>Recipe</th>
+            <th>Servings</th>
+            <th>Calores/Serving</th>
+            <th>Rating</th>
+            <th>Photo URL</th>
+          </tr>
+          <tr>
+            <td class="toplabel">
+              <!-- <label for="vm.recipe.title">Recipe Name </label> -->
+              <input type="text" ng-model="vm.recipe.title">
+            </td>
+            <td class="toplabel">
+              <!-- <label for="vm.recipe.servings">Servings </label> -->
+              <input type="text" ng-model="vm.recipe.servings">
+            </td>
+            <td class="toplabel">
+              <!-- <label for="vm.recipe.calories">Calories per Serving</label> -->
+              <input type="text" ng-model="vm.recipe.calories">
+            </td>
+            <td class="toplabel">
+              <!-- <label for="vm.recipe.rating">Ratings - 10 is the Best</label> -->
+              <input type="text" ng-model="vm.recipe.rating">
+            </td>
+            <td class="toplabel">
+              <!-- <label for="vm.recipe.photo_url">Photo URL</label> -->
+              <input type="text" ng-model="vm.recipe.photo_url">
+            </td>
+          </thead>
+        </table>
+      </div>
+        <label for="vm.recipe.instructions">Instructions </label>
+        <textarea rows="3" type="text" ng-model="vm.recipe.instructions"></textarea><br>
+        <button class="btn editbtn" data-ng-click="vm.updateRecipe(recipe)">Update Recipe Information</button>
+      </span>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th colspan="3">Edit Ingredients</th><br><br>
+            <tr data-ng-repeat="ingredient in vm.ingredients">
+              <span ng-hide="ingredient.showEdit">
+                <td tabindex="1">{{ingredient.amount}} {{ingredient.measurement}} {{ingredient.component}}
+                  <span class="btn-group pull-right row">
+                    <span class="col-md-3">
+                      <span ng-hide="ingredient.showButton">
+                        <button ng-click="ingredient.showEdit = !ingredient.showEdit; ingredient.showButton = !ingredient.showButton" class="btn editbtn">  Edit</button>
+                      </span>
+                      <span ng-show="ingredient.showButton">
+                        <button ng-click="ingredient.showEdit = !ingredient.showEdit; ingredient.showButton = !ingredient.showButton"  class="btn editbtn">  Cancel </button>
+                      </span>
+                    </span>
+                    <span class="col-md-1"></span>
+                    <span class="col-md-3">
+                      <button class="btn deletebtn" data-ng-click="vm.destroy(ingredient)">Delete</button>
+                    </span>
+                  </span>
+                  <span ng-show="ingredient.showEdit">
+                    <label for="vm.ingredient.amount">Amount</label>
+                    <input type="text" ng-model="ingredient.amount">
+                    <label for="vm.ingredient.measurement">Measurment</label>
+                    <select ng-model="vm.ingredient.measurement" class="dropdown">
+                      <option ng-repeat="measurement in vm.measurements" ng-selected="{{ measurement === ingredient.measurement ? 'true' : 'false' }}" value="{{measurement}}">{{measurement}}</option>
+                    </select>
+                    <label for="vm.ingredient.component">Ingredient</label>
+                    <input type="text" ng-model="ingredient.component">
+                    <button class="btn editbtn" ng-click="vm.updateIngredient(ingredient); ingredient.showEdit = !ingredient.showEdit ">Update</button>
+                  </span>
+                </td>
+              </span>
+            </tr>
+          </thead>
+        </table>
+        <input type="text" ng-model="vm.new_ingredient.amount" placeholder="Enter Amount" >
+        <label for="vm.ingredient.measurement" class="light_label">Measurment</label>
+        <select ng-model="vm.new_ingredient.measurement" class="dropdown" >
+          <option ng-repeat="measurement in vm.measurements" value="{{measurement}}">{{measurement}}</option>
+        </select>
+        <input type="text" ng-model="vm.new_ingredient.component" placeholder="Enter Ingredient" >
+        <button class="createbtn" data-ng-click="vm.create()">Create New Ingredient</button><br>
+    </tr>
+  <td valign="bottom">
+    <span><br>
+      <button data-ui-sref="categoryShow({id: vm.recipe.category_id})" class="btn updatebtn">Go Back</button>
+      <button data-ui-sref="recipeShow({id: vm.recipe.id, category_id: vm.recipe.category_id})" class="btn createbtn">View Recipe</button>
+    </span>
+  </td>
 </div>
+</main>

@@ -1,6 +1,19 @@
 # README
 
-when change initializers need to restart server??
+1. Welcome to Baking-minus-the-math.
+
+   Goals:
+
+    1. An easy to access and navigate storage system for recipes.
+
+    Future Goals:
+
+    2. The ability to multiply and divide recipes.
+    3. The ability to enter ingredients and find recipes locally.
+    4. The ability to enter ingredients and find recipes on line (this has
+       already been accomplished in rails locally I just need to implement it in angular)
+
+The following are my notes for the creation of the data base:
 
 rake assets:precompile
 rails new baking-minus-the-math -d postgresql
@@ -68,7 +81,7 @@ adding to very top of javascripts/categories/index.controller.js auto find and i
    //= require angular
    //= require angular-resource
 
- add to app/stylesheets/categories.css(No spaces but afraid will read it)
+ add to app/stylesheets/applicatin.css.scss
 
  / *
  * =      require bootstrap
@@ -111,6 +124,7 @@ added app.js  removed angular import from categories.js put everything in their 
 //= require angular-resource
 //= require angular-ui-router
 
+set up angular app and states:
 
 "use strict";
 
@@ -251,23 +265,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 
 *****************************************
 Adding a Recipe
