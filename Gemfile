@@ -21,7 +21,7 @@ gem 'angularjs-rails'
 gem 'rails-angular-material'
 
 gem 'angular-rails-templates'
-gem 'bower-rails'
+
 
 gem "heroku"
 # Use jquery as the JavaScript library
