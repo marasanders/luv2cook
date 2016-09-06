@@ -4,8 +4,8 @@
   angular
   .module("luv2cook", [
     "ui.router",
-    "ngResource"
-    // "categories"
+    "ngResource",
+    "categories"
   ])
   .config([
     "$stateProvider",
@@ -221,19 +221,20 @@
     })
     vm.ingredients = IngredientFactory.query({recipe_id: $stateParams.id})
 
-    var Ingredient = $resource("/ingredients/:id.json", {}, {
-        update: {method: "PUT"}
-      });
+    // var Ingredient = $resource("/ingredients/:id.json", {}, {
+    //     update: {method: "PUT"}
+    //   });
+
       vm.measurements = MeasurementsFactory.query();
 
 
       vm.update = function(ing){
-        Ingredient.update({id: ing.id}, ing, function(response){
+        IngredientFactory.update({id: ing.id}, ing, function(response){
         });
       }
 
     vm.destroy = function(ing){
-      Ingredient.remove({id: ing.id}, function(response){
+      IngredientFactory.remove({id: ing.id}, function(response){
         if(response.success) vm.ingredients.splice(vm.ingredients.indexOf(ing), 1);
       });
     }
