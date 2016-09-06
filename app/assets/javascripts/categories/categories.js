@@ -2,7 +2,7 @@
 
 (function(){
   angular
-  .module("categories", ["ngResource", "ui.router"])
+  .module("categories", ["ngResource"])
   .controller("CategoryController", ["$resource", CategoryController]);
 
   function CategoryController($resource){
