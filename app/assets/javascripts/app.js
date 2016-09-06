@@ -4,8 +4,8 @@
   angular
   .module("luv2cook", [
     "ui.router",
-    "ngResource",
-    "categories"
+    "ngResource"
+    // "categories"
   ])
   .config([
     "$stateProvider",

@@ -22,8 +22,6 @@ gem 'rails-angular-material'
 
 gem 'angular-rails-templates'
 
-gem 'rails_serve_static_assets', group: [:production]
-
 
 gem "heroku"
 # Use jquery as the JavaScript library
