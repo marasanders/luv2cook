@@ -114,21 +114,23 @@
     vm.create = function(){
       if (vm.new_category.Cat_name){
         Category.save(vm.new_category, function(response){
+          console.log(response);
+          vm.category_data.push(response)
+          window.location = ""
             // vm.new_catgory = new CategoryFactory();
 // New Category Id is not Accessible - update vm.category_data so it contains the new category
-          CategoryFactory.query().$promise.then(function(categories){
-            vm.category_data = categories
+          // CategoryFactory.query().$promise.then(function(categories){
+          //   vm.category_data = categories
 // Now lets reload the page with the updated database so you can delete the new category if you change your mind
-             $state.go("categoryIndex", {reload: true})
-             $state.go("categoryIndex", {reload: true})
-           })
+            //  $state.go("categoryIndex")
+          //  })
 //  if(response.success)  - update angular table to reflect new recipe on screen
          })
-         vm.category_data.push(angular.copy(vm.new_category));
+        //  vm.category_data.push(angular.copy(vm.new_category));
       }else{
           alert("Category can not be blank!!");
       }
-      vm.new_category = {};
+      vm.new_category = new CategoryFactory()
     }
 
 //Edit Category
@@ -161,6 +163,9 @@
       vm.recipes = recipes
     })
 
+    vm.goHome = function () {
+      window.location = ""
+     }
 //delete Recipe
     vm.destroy = function(recipe_index){
       var recipe = vm.recipes[recipe_index]
