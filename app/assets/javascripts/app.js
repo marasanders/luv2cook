@@ -28,9 +28,9 @@
    MeasurementsFactoryFunction
   ])
   .controller("CategoryIndexController", [
-    "$resource",
     "CategoryFactory",
     "$stateParams",
+    "$resource",
     "$http",
     "$state",
     CategoryIndexController
@@ -93,7 +93,7 @@
       })
   }
 //Index all the Categories
-  function CategoryIndexController($resource, CategoryFactory, $stateParams, $http, $state){
+  function CategoryIndexController(CategoryFactory, $stateParams, $resource, $http, $state){
     var vm = this;
     vm.category_data = {}
 //Get categories from the database
@@ -114,10 +114,17 @@
     vm.create = function(){
       if (vm.new_category.Cat_name){
         Category.save(vm.new_category, function(response){
-          if(response.success) vm.catgory_data.push(response);
-            vm.new_catgory = new CategoryFactory();
-          })
-          vm.category_data.push(angular.copy(vm.new_category));
+            // vm.new_catgory = new CategoryFactory();
+// New Category Id is not Accessible - update vm.category_data so it contains the new category
+          CategoryFactory.query().$promise.then(function(categories){
+            vm.category_data = categories
+// Now lets reload the page with the updated database so you can delete the new category if you change your mind
+             $state.go("categoryIndex", {reload: true})
+             $state.go("categoryIndex", {reload: true})
+           })
+//  if(response.success)  - update angular table to reflect new recipe on screen
+         })
+         vm.category_data.push(angular.copy(vm.new_category));
       }else{
           alert("Category can not be blank!!");
       }
