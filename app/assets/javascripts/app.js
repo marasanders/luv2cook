@@ -92,54 +92,47 @@
         controllerAs: "vm"
       })
   }
-//Index all the Categories
-  function CategoryIndexController(CategoryFactory, $stateParams, $resource, $http, $state){
-    var vm = this;
-    vm.category_data = {}
-//Get categories from the database
-    var Category = $resource("/categories/:id.json", {}, {
-      update: {method: "PUT"}
-    });
-    vm.category_data = CategoryFactory.query();
-
-//Delete a Category
-    vm.destroy = function(cat){
-      Category.remove({id: cat.id}, function(response){
-        if(response.success) vm.category_data.splice(vm.category_data.indexOf(cat), 1);
+  //Index all the Categories
+    function CategoryIndexController(CategoryFactory, $stateParams, $resource, $http, $state){
+      var vm = this;
+      vm.category_data = {}
+  //Get categories from the database
+      var Category = $resource("/categories/:id.json", {}, {
+        update: {method: "PUT"}
       });
-    }
+      vm.category_data = CategoryFactory.query();
 
-//Create a Category throw an error if name is blank
-    vm.new_category = new CategoryFactory();
-    vm.create = function(){
-      if (vm.new_category.Cat_name){
-        Category.save(vm.new_category, function(response){
-          console.log(response);
-          vm.category_data.push(response)
-          window.location = ""
-            // vm.new_catgory = new CategoryFactory();
-// New Category Id is not Accessible - update vm.category_data so it contains the new category
-          // CategoryFactory.query().$promise.then(function(categories){
-          //   vm.category_data = categories
-// Now lets reload the page with the updated database so you can delete the new category if you change your mind
-            //  $state.go("categoryIndex")
-          //  })
-//  if(response.success)  - update angular table to reflect new recipe on screen
-         })
-        //  vm.category_data.push(angular.copy(vm.new_category));
-      }else{
-          alert("Category can not be blank!!");
+  //Delete a Category
+      vm.destroy = function(cat){
+        Category.remove({id: cat.id}, function(response){
+          if(response.success) vm.category_data.splice(vm.category_data.indexOf(cat), 1);
+        });
       }
-      vm.new_category = new CategoryFactory()
-    }
 
-//Edit Category
-    vm.update = function(category){
-      Category.update({id: category.id}, category, function(response){
-        category.showEdit = !category.showEdit
-      });
-    }
-  } //Close CategoryIndexController
+  //Create a Category throw an error if name is blank
+      vm.new_category = new CategoryFactory();
+      vm.create = function(){
+        if (vm.new_category.Cat_name){
+          Category.save(vm.new_category, function(response){
+            console.log(response);
+            vm.category_data.push(response)
+            window.location = ""
+           })
+        }else{
+            alert("Category can not be blank!!");
+        }
+        vm.new_category = new CategoryFactory()
+      }
+
+  //Edit Category
+      vm.update = function(category){
+        Category.update({id: category.id}, category, function(response){
+          category.showEdit = !category.showEdit
+        });
+      }
+    } //Close CategoryIndexController
+
+
 
   function CategoryFactoryFunction($resource) {
     return $resource("/categories/:id.json", {}, {
@@ -162,7 +155,7 @@
     RecipeFactory.query({category_id: $stateParams.id}).$promise.then(function(recipes){
       vm.recipes = recipes
     })
-
+//facilitates navigation to category index as scope affects navigation
     vm.goHome = function () {
       window.location = ""
      }
@@ -195,7 +188,7 @@
              $state.go("recipeEdit", {id: newRecipe.id, category_id: $stateParams.id}, {reload: true})
            })
 //  if(response.success) vm.recipes.push(response) - update angular table to reflect new recipe on screen
-           vm.new_recipe = new RecipeFactory(); //{category_id: $stateParams.id});
+           vm.new_recipe = new RecipeFactory();
          })
          vm.recipes.push(angular.copy(vm.new_recipe));
        } else {
@@ -250,7 +243,7 @@
     }
 
 
-    vm.new_ingredient = new IngredientFactory(); //{category_id: $stateParams.id});
+    vm.new_ingredient = new IngredientFactory();
      vm.create = function(){
        vm.new_ingredient.$save({recipe_id: $stateParams.id}, function(response){
          vm.ingredients = IngredientFactory.query({recipe_id: $stateParams.id})

@@ -1,0 +1,46 @@
+function RecipeApiFactoryFunction($resource) {
+  return $resource("/fetch_recipes", {}, {
+    update: {method: "PUT"}
+  })
+}
+
+
+//Index all the Categories
+  function CategoryIndexController(CategoryFactory, $stateParams, $resource, $http, $state){
+    var vm = this;
+    vm.category_data = {}
+//Get categories from the database
+    var Category = $resource("/categories/:id.json", {}, {
+      update: {method: "PUT"}
+    });
+    vm.category_data = CategoryFactory.query();
+
+//Delete a Category
+    vm.destroy = function(cat){
+      Category.remove({id: cat.id}, function(response){
+        if(response.success) vm.category_data.splice(vm.category_data.indexOf(cat), 1);
+      });
+    }
+
+//Create a Category throw an error if name is blank reload page on add to update database for immediate changes otherwise will throw an error if immediately delete new category
+    vm.new_category = new CategoryFactory();
+    vm.create = function(){
+      if (vm.new_category.Cat_name){
+        Category.save(vm.new_category, function(response){
+          vm.category_data.push(response)
+          window.location = ""
+        }
+      }else{
+        alert("Category can not be blank!!");
+      }
+    vm.new_category = new CategoryFactory()
+    }
+
+
+//Edit Category
+    vm.update = function(category){
+      Category.update({id: category.id}, category, function(response){
+        category.showEdit = !category.showEdit
+      });
+    }
+  } //Close CategoryIndexController

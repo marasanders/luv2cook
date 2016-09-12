@@ -38,6 +38,12 @@ class RecipesController < ApplicationController
     render json: {success: true}, status: :ok
   end
 
+  def fetch_recipes
+    @search_term = params[:looking_for] || 'chocolate'
+    @recipes = RecipeApi.for(@search_term)
+    render json: @recipes
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
